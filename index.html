@@ -1,0 +1,174 @@
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Para Stephanny ❤️</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at center, #1b2735 0%, #090a0f 100%);
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            padding: 20px;
+        }
+
+        /* Estrellas de fondo */
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: flicker 2s infinite;
+            z-index: 1;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Tarjeta adaptable */
+        .card {
+            background-color: #ffe5ec;
+            padding: 30px 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(255, 77, 109, 0.6);
+            text-align: center;
+            border: 4px solid #ff4d6d;
+            width: 100%;
+            max-width: 320px; /* Tamaño ideal para móvil */
+            position: relative;
+            z-index: 100;
+        }
+
+        h1 {
+            color: #d90429;
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #ff4d6d;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+
+        /* Botones */
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        button {
+            padding: 15px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            touch-action: manipulation; /* Optimizado para móvil */
+        }
+
+        .btn-yes {
+            background-color: #ff4d6d;
+            color: white;
+            box-shadow: 0 4px 10px rgba(255, 77, 109, 0.4);
+        }
+
+        #btn-maybe {
+            background-color: white;
+            color: #ff4d6d;
+            border: 2px solid #ff4d6d;
+            transition: 0.1s; /* Movimiento rápido */
+        }
+
+        /* Corazones */
+        .heart {
+            position: absolute;
+            color: #ff4d6d;
+            pointer-events: none;
+            z-index: 10;
+            animation: floatUp 4s linear forwards;
+        }
+
+        @keyframes floatUp {
+            to {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="stars"></div>
+
+    <div class="card">
+        <h1>¿Quieres ser mi San Valentín?</h1>
+        <p class="subtitle">Especialmente para ti, Stephanny ❤️</p>
+        
+        <div class="btn-container">
+            <button class="btn-yes" onclick="accepted()">Opción 1: ¡SÍ QUIERO!</button>
+            <button id="btn-maybe" onmouseover="move()" onclick="move()" ontouchstart="move()">Opción 2: Quizá...</button>
+        </div>
+    </div>
+
+    <script>
+        // Estrellas
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 80; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 2 + 'px';
+            star.style.width = size;
+            star.style.height = size;
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.top = Math.random() * 100 + 'vh';
+            starsContainer.appendChild(star);
+        }
+
+        // Función de escape (mejorada para móviles)
+        function move() {
+            const btn = document.getElementById('btn-maybe');
+            // Mantener el botón dentro de los límites visibles del celular
+            const padding = 50;
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth - padding);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight - padding);
+            
+            btn.style.position = 'fixed';
+            btn.style.left = Math.max(padding, x) + 'px';
+            btn.style.top = Math.max(padding, y) + 'px';
+        }
+
+        function accepted() {
+            alert('Te amo escribeme para vernos ❤️');
+            // Aquí puedes poner una lluvia masiva de corazones si quieres
+        }
+
+        // Corazones
+        setInterval(() => {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = '105vh';
+            heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 4000);
+        }, 400);
+    </script>
+</body>
+</html>
